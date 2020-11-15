@@ -1,15 +1,19 @@
 package me.kenshinji.comicapp.dto;
 
+import lombok.Data;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.Locale;
-import java.util.Optional;
 
+@Data
 public class PdlDto {
-    String title, link, guid;
-    String publishedDate;
+    private String title;
+    private String link;
+    private String guid;
+    private String publishedDate;
 
     public PdlDto(String title, String link, String guid,
                   String publishedDate) {
@@ -19,41 +23,6 @@ public class PdlDto {
         this.guid = guid;
         this.publishedDate = publishedDate;
 
-    }
-
-    public PdlDto() {
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public String getGuid() {
-        return guid;
-    }
-
-    public void setGuid(String guid) {
-        this.guid = guid;
-    }
-
-    public String getPublishedDate() {
-        return publishedDate;
-    }
-
-    public void setPublishedDate(String publishedDate) {
-        this.publishedDate = publishedDate;
     }
 
     public ComicDto toComicDTO() {

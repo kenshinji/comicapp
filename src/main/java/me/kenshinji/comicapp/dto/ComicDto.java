@@ -1,12 +1,24 @@
 package me.kenshinji.comicapp.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
 public class ComicDto {
 
+    @Getter
+    @Setter
     private String pictureURL;
+
+    @Getter
+    @Setter
     private String title;
+
+    @Getter
+    @Setter
     private String browserURL;
 
     private LocalDate publishingDate;
@@ -15,31 +27,8 @@ public class ComicDto {
         return publishingDate.format(DateTimeFormatter.ISO_DATE);
     }
 
-    public void setDate(LocalDate parsedDate) {
+    void setDate(LocalDate parsedDate) {
         this.publishingDate = parsedDate;
     }
 
-    public String getPictureURL() {
-        return pictureURL;
-    }
-
-    public void setPictureURL(String pictureURL) {
-        this.pictureURL = pictureURL;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getBrowserURL() {
-        return browserURL;
-    }
-
-    public void setBrowserURL(String browserURL) {
-        this.browserURL = browserURL;
-    }
 }

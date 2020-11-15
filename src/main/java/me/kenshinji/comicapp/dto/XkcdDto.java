@@ -1,8 +1,11 @@
 package me.kenshinji.comicapp.dto;
 
 
+import lombok.Data;
+
 import java.time.LocalDate;
 
+@Data
 public class XkcdDto {
 
     public XkcdDto(String img, String title, int num, String month, String day, String year) {
@@ -18,55 +21,9 @@ public class XkcdDto {
     private String img;
     private String title;
     private int num;
-    private String month, day, year;
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public void setMonth(String month) {
-        this.month = month;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    private String month;
+    private String day;
+    private String year;
 
     public ComicDto toComicDto() {
         ComicDto ret = new ComicDto();
@@ -74,8 +31,8 @@ public class XkcdDto {
         ret.setPictureURL(this.img);
         ret.setTitle(this.title);
 
-        ret.setDate(LocalDate.of(Integer.valueOf(this.year).intValue(), Integer.valueOf(this.month).intValue(),
-                Integer.valueOf(this.day).intValue()));
+        ret.setDate(LocalDate.of(Integer.valueOf(this.year), Integer.valueOf(this.month),
+                Integer.valueOf(this.day)));
 
         return ret;
     }

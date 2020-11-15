@@ -20,8 +20,11 @@ public class PdlClient implements Client{
     @Value("${feed.url}")
     private String FEED_URL;
 
+    @Value("${strip.count}")
+    private int STRIP_COUNT;
+
     @Override
-    public List<ComicDto> retrieve(int qty) {
+    public List<ComicDto> retrieve() {
         List<ComicDto> listToReturn = new ArrayList<ComicDto>();
 
         RssReader reader = new RssReader();
@@ -29,7 +32,7 @@ public class PdlClient implements Client{
 
         try {
             rssFeed = reader.read(FEED_URL);
-            List<Item> articles = rssFeed.limit(qty).collect(Collectors.toList());
+            List<Item> articles = rssFeed.limit(STRIP_COUNT).collect(Collectors.toList());
 
             for (Item item : articles) {
                 PdlDto PDLComic = new PdlDto(item.getTitle(), item.getLink(), item.getGuid(), item.getPubDate());

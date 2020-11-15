@@ -4,6 +4,7 @@ import me.kenshinji.comicapp.dto.ComicDto;
 import me.kenshinji.comicapp.dto.XkcdDto;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -19,16 +20,18 @@ public class XkcdClient implements Client {
     private final static String CURRENT_URL = "https://xkcd.com/info.0.json";
     private final static String NUMBER_URL = "https://xkcd.com/NUMBER/info.0.json";
 
+    @Value("${strip.count}")
+    private int STRIP_COUNT;
 
     @Override
-    public List<ComicDto> retrieve(int qty) throws IOException {
+    public List<ComicDto> retrieve() throws IOException {
 
         List<ComicDto> comicDtos = new ArrayList<>();
         JSONObject json = new JSONObject(IOUtils.toString(new URL(CURRENT_URL), StandardCharsets.UTF_8));
         int currentNumber = json.getInt("num");
         comicDtos.add(mapToComicDto(json));
 
-        for (int i = 1; i < qty; i++) {
+        for (int i = 1; i < STRIP_COUNT; i++) {
             JSONObject rep = new JSONObject(IOUtils.toString(URI.create(NUMBER_URL.replace("NUMBER", String.valueOf(currentNumber - i))), StandardCharsets.UTF_8));
            comicDtos.add(mapToComicDto(rep));
         }

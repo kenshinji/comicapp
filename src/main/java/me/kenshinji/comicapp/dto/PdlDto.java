@@ -37,7 +37,6 @@ public class PdlDto {
             ret.setDate(dateFormat.parse(this.publishedDate).toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

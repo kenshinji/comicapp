@@ -17,8 +17,16 @@ import java.util.stream.Stream;
 @Component
 public class PdlClient implements Client{
 
+    public void setFEED_URL(String FEED_URL) {
+        this.FEED_URL = FEED_URL;
+    }
+
     @Value("${feed.url}")
     private String FEED_URL;
+
+    public void setSTRIP_COUNT(int STRIP_COUNT) {
+        this.STRIP_COUNT = STRIP_COUNT;
+    }
 
     @Value("${strip.count}")
     private int STRIP_COUNT;
@@ -27,11 +35,10 @@ public class PdlClient implements Client{
     public List<ComicDto> retrieve() {
         List<ComicDto> listToReturn = new ArrayList<ComicDto>();
 
-        RssReader reader = new RssReader();
         Stream<Item> rssFeed = null;
-
+        RssReader rssreader = new RssReader();
         try {
-            rssFeed = reader.read(FEED_URL);
+            rssFeed = rssreader.read(FEED_URL);
             List<Item> articles = rssFeed.limit(STRIP_COUNT).collect(Collectors.toList());
 
             for (Item item : articles) {
@@ -39,8 +46,8 @@ public class PdlClient implements Client{
                 ComicDto comicObject = PDLComic.toComicDTO();
                 listToReturn.add(comicObject);
             }
-        } catch (IOException e) { // TODO Auto-generated catch block e.printStackTrace(); }
-
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
         }
         return listToReturn;
     }

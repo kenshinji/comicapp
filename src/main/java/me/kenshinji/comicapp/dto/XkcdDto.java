@@ -2,6 +2,7 @@ package me.kenshinji.comicapp.dto;
 
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDate;
 
@@ -17,7 +18,9 @@ public class XkcdDto {
         this.year = year;
     }
 
-    private static final String XKCD_BASE_URL = "https://xkcd.com/";
+    @Value("${xkcd.base.url}")
+    private String XKCD_BASE_URL;
+
     private String img;
     private String title;
     private int num;

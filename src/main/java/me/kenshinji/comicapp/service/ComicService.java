@@ -5,8 +5,6 @@ import me.kenshinji.comicapp.service.client.PdlClient;
 import me.kenshinji.comicapp.service.client.XkcdClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +17,7 @@ public class ComicService {
     @Autowired
     private XkcdClient xkcdClient;
 
-    public List<ComicDto> getComics() throws IOException {
+    public List<ComicDto> getComics(){
         List<ComicDto> list = new ArrayList<>();
         list.addAll(pdlClient.retrieve());
         list.addAll(xkcdClient.retrieve());
